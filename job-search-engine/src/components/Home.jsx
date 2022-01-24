@@ -1,13 +1,15 @@
 import { MdPersonSearch } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 import { Form, Row, Col, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
 const Home = () => {
   const [developer, setDeveloper] = useState("");
-  const [limit, setLimit] = useState('')
-  const [skip, setSkip] = useState('')
+  const [limit, setLimit] = useState("");
+  const [skip, setSkip] = useState("");
   const [job, setJob] = useState([]);
+  const location = useLocation();
 
   // ******************* FETCHING  BY INPUT VALUE *****************
 
@@ -19,13 +21,12 @@ const Home = () => {
           "Content-Type": "application/json",
         }
       );
-  
+
       if (response.ok) {
         const jobs = await response.json();
         setJob(jobs);
         console.log(job);
       }
-      
     } catch (error) {
       console.log(error);
     }
@@ -41,13 +42,13 @@ const Home = () => {
   //         "Content-Type": "application/json",
   //       }
   //     );
-  
+
   //     if (response.ok) {
   //       const jobs = await response.json();
   //       setJob(jobs);
   //       console.log(job);
   //     }
-      
+
   //   } catch (error) {
   //     console.log(error);
   //   }
@@ -78,24 +79,32 @@ const Home = () => {
         </Form.Group>
       </Form>
       <Row>
-        {
-            job.data &&
-            job.data
-                .filter((j) => j.title.toLowerCase().includes(developer))
-                .map((j) => (
-                <Col xs={3} key={j._id}>
-                    <Card className="mt-5">
-                    <Card.Body>
-                        <Card.Title style={{ color: "white" }}>{j.company_name}</Card.Title>
-                        <Card.Text style={{ color: "white" }}>
-                            {j.title}
-                        </Card.Text>
-                        {/* <Button variant="primary">{j.url}</Button> */}
-                    </Card.Body>
-                    </Card>
-                </Col>
-                ))
-        }
+        {job.data &&
+          job.data
+            .filter((j) => j.title.toLowerCase().includes(developer))
+            .map((j) => (
+              <Col xs={3} key={j._id}>
+                <Card className="mt-5">
+                  <Card.Body>
+                    <Card.Title style={{ color: "white" }}>
+                      
+                      <Link to="/:company">
+                        <div
+                          className={
+                            "nav-link" +
+                            (location.pathname === "/:company" ? " active" : "")
+                          }
+                        >
+                         {j.company_name}
+                        </div>
+                      </Link>
+                    </Card.Title>
+                    <Card.Text style={{ color: "white" }}>{j.title}</Card.Text>
+                    {/* <Button variant="primary">{j.url}</Button> */}
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
       </Row>
     </>
   );
