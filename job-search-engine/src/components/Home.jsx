@@ -9,17 +9,6 @@ const Home = () => {
   const [skip, setSkip] = useState('')
   const [job, setJob] = useState([]);
 
-  // const fetchJobs = async()=> {
-  //     const response = await fetch("https://strive-jobs-api.herokuapp.com/jobs", {
-  //         "Content-Type":"application/json"
-  //     })
-
-  //     if(response.ok){
-  //         const jobs = await response.json()
-  //         setJob(jobs)
-  //     }
-  // }
-
   const fetchJobsWithInputValue = async () => {
     const response = await fetch(
       "https://strive-jobs-api.herokuapp.com/jobs?search=" + developer,
@@ -34,10 +23,6 @@ const Home = () => {
       console.log(job);
     }
   };
-
-  // useEffect(() => {
-  //    fetchJobs()
-  //   }, []);
 
   useEffect(() => {
     fetchJobsWithInputValue();
