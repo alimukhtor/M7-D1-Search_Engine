@@ -1,6 +1,6 @@
 import { MdPersonSearch } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
-import {Form} from 'react-bootstrap'
+import {Form, Row, Col} from 'react-bootstrap'
 import {useState, useEffect} from 'react'
 
 const Home = () => {
@@ -8,22 +8,43 @@ const Home = () => {
     const [job, setJob] = useState([])
 
 
-    const fetchJobs = async(query)=> {
-        const response = await fetch("https://strive-jobs-api.herokuapp.com/" + query, {
+    const fetchJobs = async()=> {
+        const response = await fetch("https://strive-jobs-api.herokuapp.com/jobs", {
             "Content-Type":"application/json"
         }) 
 
         if(response.ok){
             const jobs = await response.json()
             setJob(jobs)
-            console.log("Data", jobs);
         }
     }
 
+    
+    const fetchJobsWithInputValue = async()=> {
+        const response = await fetch("https://strive-jobs-api.herokuapp.com/jobs?search=" + inputValue, {
+            "Content-Type":"application/json"
+        }) 
+
+        if(response.ok){
+            const jobs = await response.json()
+            setJob(jobs)
+        }
+    }
+    console.log("JobList:", job);
+    // const filterJobs =(inputValue)=> {
+    //     return(
+    //         job.filter(j => j.title.toLowerCase().include(inputValue))
+    //     )
+    // }
+    
+
     useEffect(() => {
-       fetchJobs("jobs")
+       fetchJobs()
       }, []);
 
+      useEffect(() => {
+        fetchJobsWithInputValue()  
+       }, [inputValue]); 
    
   return (
     <>
@@ -39,6 +60,15 @@ const Home = () => {
             />
         </Form.Group>
       </Form>
+      <Row>
+          {
+              job.data && job.data.slice(0, 100).filter(j => j.title.toLowerCase().includes(inputValue)).map(j => (
+                <Col xs={3} key={j._id}>
+                    <h1 style={{color: "white"}}>{j.title}</h1>
+                </Col>
+            ))
+          }
+        </Row>
     </>
   );
 };
