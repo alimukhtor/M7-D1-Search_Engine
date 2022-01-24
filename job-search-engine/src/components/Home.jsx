@@ -9,25 +9,57 @@ const Home = () => {
   const [skip, setSkip] = useState('')
   const [job, setJob] = useState([]);
 
-  const fetchJobsWithInputValue = async () => {
-    const response = await fetch(
-      "https://strive-jobs-api.herokuapp.com/jobs?search=" + developer,
-      {
-        "Content-Type": "application/json",
-      }
-    );
+  // ******************* FETCHING  BY INPUT VALUE *****************
 
-    if (response.ok) {
-      const jobs = await response.json();
-      setJob(jobs);
-      console.log(job);
+  const fetchJobsWithInputValue = async () => {
+    try {
+      const response = await fetch(
+        `https://strive-jobs-api.herokuapp.com/jobs?search=${developer}`,
+        {
+          "Content-Type": "application/json",
+        }
+      );
+  
+      if (response.ok) {
+        const jobs = await response.json();
+        setJob(jobs);
+        console.log(job);
+      }
+      
+    } catch (error) {
+      console.log(error);
     }
   };
+
+  // ******************* FETCHING  BY LIMIT AND OFFSET *****************
+
+  // const fetchJobsWitHLimitAndOffset = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://strive-jobs-api.herokuapp.com/jobs?limit=${limit}&&skip=${skip}`,
+  //       {
+  //         "Content-Type": "application/json",
+  //       }
+  //     );
+  
+  //     if (response.ok) {
+  //       const jobs = await response.json();
+  //       setJob(jobs);
+  //       console.log(job);
+  //     }
+      
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     fetchJobsWithInputValue();
   }, [developer]);
 
+  // useEffect(() => {
+  //   fetchJobsWitHLimitAndOffset();
+  // }, [limit, skip]);
   return (
     <>
       <h1 className="text-light mt-5">
@@ -49,11 +81,10 @@ const Home = () => {
         {
             job.data &&
             job.data
-                .slice(0, 100)
-                .filter((j) => j.title.toLowerCase().includes(developer, limit))
+                .filter((j) => j.title.toLowerCase().includes(developer))
                 .map((j) => (
                 <Col xs={3} key={j._id}>
-                    <Card>
+                    <Card className="mt-5">
                     <Card.Body>
                         <Card.Title style={{ color: "white" }}>{j.company_name}</Card.Title>
                         <Card.Text style={{ color: "white" }}>
