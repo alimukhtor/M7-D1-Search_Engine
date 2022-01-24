@@ -1,51 +1,48 @@
 import { MdPersonSearch } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
-import {Form, Row, Col} from 'react-bootstrap'
-import {useState, useEffect} from 'react'
+import { Form, Row, Col, Card, Button } from "react-bootstrap";
+import { useState, useEffect } from "react";
 
 const Home = () => {
-    const [inputValue, setInputValue] = useState('')
-    const [job, setJob] = useState([])
+  const [developer, setDeveloper] = useState("");
+  const [limit, setLimit] = useState('')
+  const [skip, setSkip] = useState('')
+  const [job, setJob] = useState([]);
 
+  // const fetchJobs = async()=> {
+  //     const response = await fetch("https://strive-jobs-api.herokuapp.com/jobs", {
+  //         "Content-Type":"application/json"
+  //     })
 
-    const fetchJobs = async()=> {
-        const response = await fetch("https://strive-jobs-api.herokuapp.com/jobs", {
-            "Content-Type":"application/json"
-        }) 
+  //     if(response.ok){
+  //         const jobs = await response.json()
+  //         setJob(jobs)
+  //     }
+  // }
 
-        if(response.ok){
-            const jobs = await response.json()
-            setJob(jobs)
-        }
+  const fetchJobsWithInputValue = async () => {
+    const response = await fetch(
+      "https://strive-jobs-api.herokuapp.com/jobs?search=" + developer,
+      {
+        "Content-Type": "application/json",
+      }
+    );
+
+    if (response.ok) {
+      const jobs = await response.json();
+      setJob(jobs);
+      console.log(job);
     }
+  };
 
-    
-    const fetchJobsWithInputValue = async()=> {
-        const response = await fetch("https://strive-jobs-api.herokuapp.com/jobs?search=" + inputValue, {
-            "Content-Type":"application/json"
-        }) 
+  // useEffect(() => {
+  //    fetchJobs()
+  //   }, []);
 
-        if(response.ok){
-            const jobs = await response.json()
-            setJob(jobs)
-        }
-    }
-    console.log("JobList:", job);
-    // const filterJobs =(inputValue)=> {
-    //     return(
-    //         job.filter(j => j.title.toLowerCase().include(inputValue))
-    //     )
-    // }
-    
+  useEffect(() => {
+    fetchJobsWithInputValue();
+  }, [developer]);
 
-    useEffect(() => {
-       fetchJobs()
-      }, []);
-
-      useEffect(() => {
-        fetchJobsWithInputValue()  
-       }, [inputValue]); 
-   
   return (
     <>
       <h1 className="text-light mt-5">
@@ -53,22 +50,37 @@ const Home = () => {
       </h1>
       <Form className="mt-5">
         <Form.Group controlId="formBasicEmail">
-            {/* <FaSearch className="search-icon"/> */}
-            <Form.Control className="text-left search-input rounded-pill" type="search" placeholder="Even Yupiter Can Be Found Here..." 
-            value={inputValue}
-            onChange={(e)=> setInputValue(e.target.value)}
-            />
+          {/* <FaSearch className="search-icon"/> */}
+          <Form.Control
+            className="text-left search-input rounded-pill"
+            type="search"
+            placeholder="Even Yupiter Can Be Found Here..."
+            value={developer}
+            onChange={(e) => setDeveloper(e.target.value)}
+          />
         </Form.Group>
       </Form>
       <Row>
-          {
-              job.data && job.data.slice(0, 100).filter(j => j.title.toLowerCase().includes(inputValue)).map(j => (
+        {
+            job.data &&
+            job.data
+                .slice(0, 100)
+                .filter((j) => j.title.toLowerCase().includes(developer, limit))
+                .map((j) => (
                 <Col xs={3} key={j._id}>
-                    <h1 style={{color: "white"}}>{j.title}</h1>
+                    <Card>
+                    <Card.Body>
+                        <Card.Title style={{ color: "white" }}>{j.company_name}</Card.Title>
+                        <Card.Text style={{ color: "white" }}>
+                            {j.title}
+                        </Card.Text>
+                        {/* <Button variant="primary">{j.url}</Button> */}
+                    </Card.Body>
+                    </Card>
                 </Col>
-            ))
-          }
-        </Row>
+                ))
+        }
+      </Row>
     </>
   );
 };
