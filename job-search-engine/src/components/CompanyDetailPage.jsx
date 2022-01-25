@@ -1,13 +1,40 @@
-import {useState, useEffect} from 'react'
-import { MdPersonSearch } from "react-icons/md";
-import {Card, Button, Row, Col, Form} from 'react-bootstrap'
+// import {useState, useEffect} from 'react'
+import { useParams } from 'react-router-dom'
+// import { MdPersonSearch } from "react-icons/md";
+// import {Card, Button, Row, Col, Form} from 'react-bootstrap'
 
 const CompanyDetailPage =(props)=> {
-  const [company, setCompany] = useState('')
-  const [job, setJob] = useState([])
+  // const [company, setCompany] = useState('')
+  // const [job, setJob] = useState([])
+  const params = useParams()
+  console.log(params)
   return(
-    <h1>this is company name : {props.match.params.company}</h1>
+    <h1>this is company name</h1>
+
   )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // const fetchJobsWithCompany = async (props) => {
     //     try {
     //       const response = await fetch(
