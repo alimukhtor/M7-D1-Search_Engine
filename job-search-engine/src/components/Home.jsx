@@ -1,7 +1,5 @@
 import { MdPersonSearch } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
-import { Form, Row, Col, Card, Button } from "react-bootstrap";
+import { Form, Row} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import JobList from "./JobList";
 
@@ -56,7 +54,7 @@ const Home = () => {
   // };
 
   useEffect(() => {
-    fetchJobsWithInputValue();
+    fetchJobsWithInputValue()
   }, [developer]);
 
   // useEffect(() => {
@@ -80,7 +78,7 @@ const Home = () => {
         </Form.Group>
       </Form>
       <Row>
-        <JobList job={job, developer}/>
+        <JobList job={job} developer={developer} />
       </Row>
     </>
   );
