@@ -8,7 +8,7 @@ const JobList =(props)=> {
         {
         props.job.data &&
           props.job.data
-            // .filter((j) => j.title.toLowerCase().includes(props.developer))
+            .filter((j) => j.title.toLowerCase().includes(props.developer))
             .map((j) => (
               <Col xs={3} key={j._id}>
                 <Card className="mt-5">

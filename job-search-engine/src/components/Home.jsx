@@ -80,7 +80,7 @@ const Home = () => {
         </Form.Group>
       </Form>
       <Row>
-        <JobList job={job}/>
+        <JobList job={job, developer}/>
       </Row>
     </>
   );
