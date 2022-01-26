@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 
 const mapStateToProps =(state)=> ({
-    favorites: state.FavoriteJobs.favorites
+    favorites: state.favoriteJobs.favorites
 })
 
 const FavoriteJobs =({favorites})=> {
@@ -11,8 +11,9 @@ const FavoriteJobs =({favorites})=> {
 
     return(
         <ListGroup>
+            <h1>Hello</h1>
             {
-                favorites.map(fav => (
+                favorites && favorites.map(fav => (
                     <ListGroup.Item>{fav.title}</ListGroup.Item>
                 ))
             }

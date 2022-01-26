@@ -58,13 +58,13 @@ const Home = () => {
             onChange={(e) => setDeveloper(e.target.value)}
           />
         </Form.Group>
-        <Button variant="" className="rounded-pill" style={{background: "#287C41", fontSize:"25px" }}>
-          <Link to="/:favorites">
-            <div className={(location.pathname === "/:favorites" ? " active" : "")}>
-             Favorites <FcLike className="mb-1" style={{ background: "#287C41", fontSize:"25px" }}/>
+        {/* <Button variant="" className="rounded-pill" style={{background: "#287C41", fontSize:"25px" }}> */}
+          <Link to="/favorites">
+            <div className={(location.pathname === "/favorites" ? " active" : "")}>
+             Favorites <FcLike className="mb-1" style={{ background: "#282C34", fontSize:"20px" }}/>
             </div>
           </Link>
-        </Button>
+        {/* </Button> */}
       </Form>
       <Row>
         <JobList job={job} developer={developer} />

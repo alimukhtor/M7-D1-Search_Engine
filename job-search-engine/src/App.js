@@ -14,7 +14,7 @@ function App() {
      	 <Routes>
          <Route path="/" element={<Home />} />
          {/* <Route path="/:companyName" element={<CompanyDetailPage />} /> */}
-         <Route path="/:favorites" element={<FavoriteJobs />} />
+         <Route path="/favorites" element={<FavoriteJobs />} />
          {/* <Route path="*" element={<NotFound />} /> */}
        </Routes>
      </BrowserRouter>
