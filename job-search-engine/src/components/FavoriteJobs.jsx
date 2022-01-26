@@ -1,10 +1,23 @@
+import { ListGroup } from 'react-bootstrap'
+import {connect} from 'react-redux'
 
-const FavoriteJobs =()=> {
+
+const mapStateToProps =(state)=> ({
+    favorites: state.FavoriteJobs.favorites
+})
+
+const FavoriteJobs =({favorites})=> {
 
 
     return(
-        <h1>This is Favorite job list</h1>
+        <ListGroup>
+            {
+                favorites.map(fav => (
+                    <ListGroup.Item>{fav.title}</ListGroup.Item>
+                ))
+            }
+        </ListGroup>
     )
 }
 
-export default FavoriteJobs
+export default connect(mapStateToProps)(FavoriteJobs)
