@@ -4,9 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { AiFillLike } from "react-icons/ai";
 import {connect} from 'react-redux'
 
-const mapStateToProps =(state)=> ({
-  favorites: state.favoriteJobs.favorites
-})
+const mapStateToProps =(state)=> ({})
 
 const mapDispatchToProps = (dispatch) => ({
   addToFavorite: (job) => {
@@ -19,6 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const JobList =({job, developer, addToFavorite})=> {
+  console.log("Jobs:", job);
     const location = useLocation();
     return(
       <>
@@ -39,7 +38,7 @@ const JobList =({job, developer, addToFavorite})=> {
                       </Link>
                     </Card.Title>
                     <Card.Text style={{ color: "white" }}>{j.title}</Card.Text>
-                   { <Button className="border-0 mr-auto" style={{ background: "#282C34" }} onClick={() => {addToFavorite(job)}}>
+                   { <Button className="border-0 mr-auto" style={{ background: "#282C34" }} onClick={() => {addToFavorite(j)}}>
                         <AiFillLike style={{ fontSize: "25px" }} />
                     </Button>}
                   </Card.Body>
