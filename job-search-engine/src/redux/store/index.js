@@ -7,10 +7,10 @@ export const initialState = {
     }
 }
 
-let configureStore = createStore(
+let configStore = createStore(
     jobReducer,
     initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 
-  export default configureStore
+  export default configStore

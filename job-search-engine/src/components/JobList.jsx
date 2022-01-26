@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-const JobList =({job, developer})=> {
+const JobList =({job, developer, addToFavorite})=> {
     const location = useLocation();
     return(
       <>
@@ -39,9 +39,9 @@ const JobList =({job, developer})=> {
                       </Link>
                     </Card.Title>
                     <Card.Text style={{ color: "white" }}>{j.title}</Card.Text>
-                    <Button className="border-0 mr-auto" style={{ background: "#282C34" }} onClick={() => {this.props.addToFavorite(job)}}>
+                   { <Button className="border-0 mr-auto" style={{ background: "#282C34" }} onClick={() => {addToFavorite(job)}}>
                         <AiFillLike style={{ fontSize: "25px" }} />
-                    </Button>
+                    </Button>}
                   </Card.Body>
                 </Card>
               </Col>
