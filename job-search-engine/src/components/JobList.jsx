@@ -1,39 +1,54 @@
-import {Col, Card} from "react-bootstrap";
+import {Col, Card, Button} from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
-const JobList =(props)=> {
+import { AiFillLike } from "react-icons/ai";
+import {connect} from 'react-redux'
+
+const mapStateToProps =(state)=> ({
+  favorites: state.favoriteJobs.favorites
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  addToFavorite: (job) => {
+    dispatch({
+      type: 'ADD_TO_FAVORITES',
+      payload: job
+
+    })
+  },
+})
+
+const JobList =({job, developer})=> {
     const location = useLocation();
     return(
-        <>
+      <>
         {
-        props.job.data &&
-          props.job.data
-            .filter((j) => j.title.toLowerCase().includes(props.developer))
+        job.data &&
+          job.data
+            .filter((j) => j.title.toLowerCase().includes(developer))
             .map((j) => (
               <Col xs={3} key={j._id}>
                 <Card className="mt-5">
                   <Card.Body>
                     <Card.Title style={{ color: "white" }}>
-                      
                       <Link to="/:company">
                         <div
-                          className={
-                            "nav-link" +
-                            (location.pathname === "/:company" ? " active" : "")
-                          }
-                        >
-                         {j.company_name}
+                          className={(location.pathname === "/:company" ? " active" : "")}>
+                          {j.company_name}
                         </div>
                       </Link>
                     </Card.Title>
                     <Card.Text style={{ color: "white" }}>{j.title}</Card.Text>
+                    <Button className="border-0 mr-auto" style={{ background: "#282C34" }} onClick={() => {this.props.addToFavorite(job)}}>
+                        <AiFillLike style={{ fontSize: "25px" }} />
+                    </Button>
                   </Card.Body>
                 </Card>
               </Col>
             ))
-                        }
-                        </>
-            )
+        }
+      </>
+          )
 }
 
-export default JobList
+export default connect(mapStateToProps, mapDispatchToProps)(JobList)

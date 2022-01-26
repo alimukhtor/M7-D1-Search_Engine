@@ -3,6 +3,7 @@ import { Form, Row} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import JobList from "./JobList";
 
+
 const Home = () => {
   const [developer, setDeveloper] = useState("");
   // const [limit, setLimit] = useState("");
@@ -31,35 +32,13 @@ const Home = () => {
     }
   };
 
-  // ******************* FETCHING  BY LIMIT AND OFFSET *****************
 
-  // const fetchJobsWitHLimitAndOffset = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `https://strive-jobs-api.herokuapp.com/jobs?limit=${limit}&&skip=${skip}`,
-  //       {
-  //         "Content-Type": "application/json",
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       const jobs = await response.json();
-  //       setJob(jobs);
-  //       console.log(job);
-  //     }
-
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     fetchJobsWithInputValue()
   }, [developer]);
 
-  // useEffect(() => {
-  //   fetchJobsWitHLimitAndOffset();
-  // }, [limit, skip]);
+
   return (
     <>
       <h1 className="text-light mt-5">

@@ -2,8 +2,8 @@ import {createStore} from 'redux'
 import jobReducer from '../reducer'
 
 export const initialState = {
-    profession:{
-        jobs: []
+    favoriteJobs:{
+        favorites: []
     }
 }
 
