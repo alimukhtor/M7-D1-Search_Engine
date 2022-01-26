@@ -1,5 +1,6 @@
 import { MdPersonSearch } from "react-icons/md";
-import { Form, Row} from "react-bootstrap";
+import { FcLike } from "react-icons/fc";
+import { Form, Row, Button} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import JobList from "./JobList";
 
@@ -55,6 +56,7 @@ const Home = () => {
             onChange={(e) => setDeveloper(e.target.value)}
           />
         </Form.Group>
+        <Button variant="" className="rounded-pill" style={{background: "#287C41", fontSize:"25px" }}>Favorites <FcLike className="mb-1" style={{ background: "#287C41", fontSize:"25px" }}/></Button>
       </Form>
       <Row>
         <JobList job={job} developer={developer} />
