@@ -3,11 +3,10 @@ import { useParams } from 'react-router-dom'
 // import { MdPersonSearch } from "react-icons/md";
 // import {Card, Button, Row, Col, Form} from 'react-bootstrap'
 
-const CompanyDetailPage =(props)=> {
+const CompanyDetailPage =()=> {
   // const [company, setCompany] = useState('')
   // const [job, setJob] = useState([])
-  const params = useParams()
-  console.log(params)
+
   return(
     <h1>this is company name</h1>
 
