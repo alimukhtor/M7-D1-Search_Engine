@@ -4,42 +4,37 @@ import { Form, Row} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import JobList from "./JobList";
+import { getAlljobOffers } from "../redux/actions";
+import { connect } from "react-redux";
 
 
-const Home = () => {
+const mapStateToProps =(state)=> ({
+  jobs:state.jobOffers.jobs
+})
+
+const mapDispatchToProps =(dispatch)=> ({
+  getJobs: ()=> {
+    dispatch(getAlljobOffers())
+  }
+})
+const Home = ({jobs, getJobs}) => {
   const [developer, setDeveloper] = useState("");
   // const [limit, setLimit] = useState("");
   // const [skip, setSkip] = useState("");
-  const [job, setJob] = useState([]);
-  const location = useLocation()
 
+  const location = useLocation()
+  
 
   // ******************* FETCHING  BY INPUT VALUE *****************
 
-  const fetchJobsWithInputValue = async () => {
-    try {
-      const response = await fetch(
-        `https://strive-jobs-api.herokuapp.com/jobs?search=${developer}`,
-        {
-          "Content-Type": "application/json",
-        }
-      );
+  // const fetchJobsWithInputValue = async () => {
+    
+    console.log("data:", jobs);
 
-      if (response.ok) {
-        const jobs = await response.json();
-        setJob(jobs);
-        console.log(job);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-
-
+  // }
   useEffect(() => {
-    fetchJobsWithInputValue()
-  }, [developer]);
+    getJobs()
+  }, []);
 
 
   return (
@@ -67,9 +62,9 @@ const Home = () => {
         {/* </Button> */}
       </Form>
       <Row>
-        <JobList job={job} developer={developer} />
+        <JobList job={jobs}/>
       </Row>
     </>
   );
 };
-export default Home;
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -2,15 +2,15 @@ import {Col, Card, Button} from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
 import { AiFillLike } from "react-icons/ai";
-import { AiTwotoneLike } from "react-icons/ai";
+// import { AiTwotoneLike } from "react-icons/ai";
 import {connect} from 'react-redux'
 import { addToFavoritesWithThunk } from "../redux/actions";
 
 const mapStateToProps =(state)=> ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  addToFavorite: (job) => {
-    dispatch(addToFavoritesWithThunk(job))
+  addToFavorite: (favJob) => {
+    dispatch(addToFavoritesWithThunk(favJob))
   },
 })
 
@@ -22,7 +22,7 @@ const JobList =({job, developer, addToFavorite})=> {
         {
         job.data &&
           job.data
-            .filter((j) => j.title.toLowerCase().includes(developer))
+            // .filter((j) => j.title.toLowerCase().includes(developer))
             .map((j) => (
               <Col xs={3} key={j._id}>
                 <Card className="mt-5">

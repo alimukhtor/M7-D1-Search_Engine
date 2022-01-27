@@ -18,7 +18,10 @@ export const initialState = {
         isError: false
     },
     jobOffers:{
-        jobs: []
+        jobs: [],
+        inputValue: '',
+        limit: '',
+        isError: null
     }
 }
 
