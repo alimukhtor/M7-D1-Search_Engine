@@ -28,10 +28,10 @@ export const removeFromFavsWithThunk =(index)=> {
     }
 }
 
-export const getAlljobOffers =()=> {
+export const getAlljobOffers =(inputValue)=> {
     return async(dispatch)=> {
         try {
-            let response = await fetch("https://strive-jobs-api.herokuapp.com/jobs?search=developer&limit=10");
+            let response = await fetch(`https://strive-jobs-api.herokuapp.com/job?search=${inputValue}&limit=20`);
             if (response.ok) {
                 console.log("Response:", response);
               let jobs = await response.json();

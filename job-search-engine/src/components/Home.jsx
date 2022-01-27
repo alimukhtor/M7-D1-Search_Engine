@@ -9,32 +9,26 @@ import { connect } from "react-redux";
 
 
 const mapStateToProps =(state)=> ({
-  jobs:state.jobOffers.jobs
+  jobs:state.jobOffers.jobs,
+  inputValue: state.jobOffers.inputValue
 })
 
 const mapDispatchToProps =(dispatch)=> ({
-  getJobs: ()=> {
-    dispatch(getAlljobOffers())
-  }
+  getJobs: (inputValue)=> {
+    dispatch(getAlljobOffers(inputValue))
+  },
 })
-const Home = ({jobs, getJobs}) => {
-  const [developer, setDeveloper] = useState("");
-  // const [limit, setLimit] = useState("");
-  // const [skip, setSkip] = useState("");
-
+const Home = ({jobs, getJobs }) => {
+  const [inputValue, setInputValue] = useState("")
   const location = useLocation()
   
+  console.log("data:", jobs);
 
-  // ******************* FETCHING  BY INPUT VALUE *****************
 
-  // const fetchJobsWithInputValue = async () => {
     
-    console.log("data:", jobs);
-
-  // }
   useEffect(() => {
-    getJobs()
-  }, []);
+    getJobs(inputValue)
+  }, [inputValue]);
 
 
   return (
@@ -49,8 +43,8 @@ const Home = ({jobs, getJobs}) => {
             className="text-left search-input rounded-pill"
             type="search"
             placeholder="Even Yupiter Can Be Found Here..."
-            value={developer}
-            onChange={(e) => setDeveloper(e.target.value)}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
           />
         </Form.Group>
         {/* <Button variant="" className="rounded-pill" style={{background: "#287C41", fontSize:"25px" }}> */}
@@ -62,7 +56,7 @@ const Home = ({jobs, getJobs}) => {
         {/* </Button> */}
       </Form>
       <Row>
-        <JobList job={jobs}/>
+        <JobList job={jobs} inputValue={inputValue}/>
       </Row>
     </>
   );

@@ -1,4 +1,4 @@
-import {Col, Card, Button} from "react-bootstrap";
+import {Col, Card, Button, Alert, Container} from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
 import { AiFillLike } from "react-icons/ai";
@@ -6,7 +6,9 @@ import { AiFillLike } from "react-icons/ai";
 import {connect} from 'react-redux'
 import { addToFavoritesWithThunk } from "../redux/actions";
 
-const mapStateToProps =(state)=> ({})
+const mapStateToProps =(state)=> ({
+  isError: state.jobOffers.isError
+})
 
 const mapDispatchToProps = (dispatch) => ({
   addToFavorite: (favJob) => {
@@ -14,15 +16,19 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-const JobList =({job, developer, addToFavorite})=> {
-  console.log("Jobs:", job);
+const JobList =({job, inputValue, addToFavorite, isError})=> {
     const location = useLocation();
     return(
+      // <Container>
       <>
-        {
-        job.data &&
+      {
+        isError 
+        ? <Alert  variant="danger" className="text-center rounded-pill mt-5" style={{ fontSize: "15px",  marginLeft:"500px" }}>
+            Error has occured {isError}
+          </Alert> 
+        : job.data &&
           job.data
-            // .filter((j) => j.title.toLowerCase().includes(developer))
+            .filter((j) => j.title.toLowerCase().includes(inputValue))
             .map((j) => (
               <Col xs={3} key={j._id}>
                 <Card className="mt-5">
@@ -47,8 +53,9 @@ const JobList =({job, developer, addToFavorite})=> {
                 </Card>
               </Col>
             ))
-        }
-      </>
+      }
+        </>
+      // </Container>
           )
 }
 

@@ -19,6 +19,11 @@ const jobsReducer =(state = initialState.jobOffers, action)=> {
                 ...state,
                 inputValue: state.jobOffers.inputValue
             }  
+        case "SET_INPUT_VALUE":
+            return {
+                ...state,
+                inputValue: action.payload
+            }
         case GET_LIMIT:
             return{
                 ...state,
