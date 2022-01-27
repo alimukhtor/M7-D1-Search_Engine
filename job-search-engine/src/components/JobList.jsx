@@ -2,6 +2,7 @@ import {Col, Card, Button} from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
 import { AiFillLike } from "react-icons/ai";
+import { AiTwotoneLike } from "react-icons/ai";
 import {connect} from 'react-redux'
 
 const mapStateToProps =(state)=> ({})
@@ -38,9 +39,13 @@ const JobList =({job, developer, addToFavorite})=> {
                       </Link>
                     </Card.Title>
                     <Card.Text style={{ color: "white" }}>{j.title}</Card.Text>
-                   { <Button className="border-0 mr-auto" style={{ background: "#282C34" }} onClick={() => {addToFavorite(j)}}>
+                   {
+                    
+                    <Button className="border-0 mr-auto" style={{ background: "#282C34" }} onClick={() => {addToFavorite(j)}}>
                         <AiFillLike style={{ fontSize: "25px" }} />
-                    </Button>}
+                    </Button>
+                    
+                  }
                   </Card.Body>
                 </Card>
               </Col>

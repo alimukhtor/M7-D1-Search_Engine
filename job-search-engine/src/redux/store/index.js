@@ -3,7 +3,8 @@ import jobReducer from '../reducer'
 
 export const initialState = {
     favoriteJobs:{
-        favorites: []
+        favorites: [],
+        isError: false
     }
 }
 
