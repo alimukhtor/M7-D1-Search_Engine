@@ -4,16 +4,13 @@ import { Link, useLocation } from "react-router-dom";
 import { AiFillLike } from "react-icons/ai";
 import { AiTwotoneLike } from "react-icons/ai";
 import {connect} from 'react-redux'
+import { addToFavoritesWithThunk } from "../redux/actions";
 
 const mapStateToProps =(state)=> ({})
 
 const mapDispatchToProps = (dispatch) => ({
   addToFavorite: (job) => {
-    dispatch({
-      type: 'ADD_TO_FAVORITES',
-      payload: job
-
-    })
+    dispatch(addToFavoritesWithThunk(job))
   },
 })
 

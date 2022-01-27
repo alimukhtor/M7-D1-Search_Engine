@@ -1,6 +1,7 @@
 import { ListGroup, Button, Row, Col } from 'react-bootstrap'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {connect} from 'react-redux'
+import {removeFromFavsWithThunk} from '../redux/actions'
 
 
 const mapStateToProps =(state)=> ({
@@ -9,11 +10,7 @@ const mapStateToProps =(state)=> ({
 
 const mapDispatchToProps =(dispatch)=> ({
     removeFromFavorite: (index) => {
-        dispatch({
-          type: 'REMOVE_FROM_FAVS',
-          payload: index
-    
-        })
+        dispatch(removeFromFavsWithThunk(index))
       },
 })
 const FavoriteJobs =({favorites, removeFromFavorite})=> {
