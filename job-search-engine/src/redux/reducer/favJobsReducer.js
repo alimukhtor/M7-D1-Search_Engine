@@ -6,7 +6,7 @@ const favJobsReducer =(state = initialState.favoriteJobs, action)=> {
         case ADD_TO_FAVORITES:
             return{
                 ...state,
-                    favorites:[state.favoriteJobs.favorites, action.payload]
+                    favorites:[...state.favoriteJobs.favorites, action.payload]
                 }
         case REMOVE_FROM_FAVS:
             return{

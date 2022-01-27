@@ -21,7 +21,8 @@ export const initialState = {
         jobs: [],
         inputValue: '',
         limit: '',
-        isError: null
+        isError: null,
+        isLoading: true
     }
 }
 

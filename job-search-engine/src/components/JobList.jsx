@@ -1,4 +1,4 @@
-import {Col, Card, Button, Alert, Container} from "react-bootstrap";
+import {Col, Card, Button, Alert, Spinner} from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
 import { AiFillLike } from "react-icons/ai";
@@ -7,7 +7,8 @@ import {connect} from 'react-redux'
 import { addToFavoritesWithThunk } from "../redux/actions";
 
 const mapStateToProps =(state)=> ({
-  isError: state.jobOffers.isError
+  isError: state.jobOffers.isError,
+  isLoading: state.jobOffers.isLoading
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -16,17 +17,20 @@ const mapDispatchToProps = (dispatch) => ({
   },
 })
 
-const JobList =({job, inputValue, addToFavorite, isError})=> {
+const JobList =({job, inputValue, addToFavorite, isError, isLoading})=> {
     const location = useLocation();
     return(
-      // <Container>
       <>
       {
-        isError 
-        ? <Alert  variant="danger" className="text-center rounded-pill mt-5" style={{ fontSize: "15px",  marginLeft:"500px" }}>
-            Error has occured {isError}
-          </Alert> 
-        : job.data &&
+        isLoading 
+        // isError
+        ?
+        // <Alert variant="danger" className="text-center rounded-pill mt-5" style={{ fontSize: "15px",  marginLeft:"500px" }}>
+        //     Error has occured {isError}
+        //   </Alert> 
+        <Spinner animation="border" variant="success"/>
+        :   
+          job.data &&
           job.data
             .filter((j) => j.title.toLowerCase().includes(inputValue))
             .map((j) => (
@@ -42,20 +46,18 @@ const JobList =({job, inputValue, addToFavorite, isError})=> {
                       </Link>
                     </Card.Title>
                     <Card.Text style={{ color: "white" }}>{j.title}</Card.Text>
-                   {
                     
                     <Button className="border-0 mr-auto" style={{ background: "#282C34" }} onClick={() => {addToFavorite(j)}}>
                         <AiFillLike style={{ fontSize: "25px" }} />
                     </Button>
                     
-                  }
                   </Card.Body>
                 </Card>
               </Col>
             ))
+            
       }
         </>
-      // </Container>
           )
 }
 

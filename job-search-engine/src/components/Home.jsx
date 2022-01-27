@@ -1,6 +1,6 @@
 import { MdPersonSearch } from "react-icons/md";
 import { FcLike } from "react-icons/fc";
-import { Form, Row} from "react-bootstrap";
+import { Form, Row, Button} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import JobList from "./JobList";
@@ -33,7 +33,7 @@ const Home = ({jobs, getJobs }) => {
 
   return (
     <>
-      <h1 className="text-light mt-5">
+      <h1 className="text-light mt-5 text-center">
         <strong>Strive Job Search Engine</strong> <MdPersonSearch />
       </h1>
       <Form className="mt-5">
@@ -47,13 +47,14 @@ const Home = ({jobs, getJobs }) => {
             onChange={(e) => setInputValue(e.target.value)}
           />
         </Form.Group>
-        {/* <Button variant="" className="rounded-pill" style={{background: "#287C41", fontSize:"25px" }}> */}
-          <Link to="/favorites">
+        <Button variant="" className="rounded-pill" style={{background: "#287C41" }}>
+          {/* <Link to="/favorites">
             <div className={(location.pathname === "/favorites" ? " active" : "")}>
              Favorites <FcLike className="mb-1" style={{ background: "#282C34", fontSize:"20px" }}/>
             </div>
-          </Link>
-        {/* </Button> */}
+          </Link> */}
+          Search
+        </Button>
       </Form>
       <Row>
         <JobList job={jobs} inputValue={inputValue}/>

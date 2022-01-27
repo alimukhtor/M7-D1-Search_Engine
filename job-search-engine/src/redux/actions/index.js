@@ -8,15 +8,22 @@ export const GET_JOB_OFFERS = "GET_JOB_OFFERS"
 export const GET_JOB_OFFERS_ERROR = "GET_JOB_OFFERS_ERROR"
 export const GET_INPUT_VALUE = "GET_INPUT_VALUE"
 export const GET_LIMIT = "GET_LIMIT"
+export const GET_LOADING_SPINNER = "GET_LOADING_SPINNER"
 
-export const addToFavoritesWithThunk =(favJob)=> {
-    return (dispatch)=> {
-        dispatch({
-            type: ADD_TO_FAVORITES,
-            payload: favJob
-        })
-    }
-}
+export const addToFavoritesWithThunk =(favJob)=> ({
+        type:ADD_TO_FAVORITES,
+        payload: favJob
+})
+
+
+// {
+//     return (dispatch)=> {
+//         dispatch({
+//             type: ADD_TO_FAVORITES,
+//             payload: favJob
+//         })
+//     }
+// }
 
 export const removeFromFavsWithThunk =(index)=> {
     return (dispatch)=> {
@@ -31,7 +38,7 @@ export const removeFromFavsWithThunk =(index)=> {
 export const getAlljobOffers =(inputValue)=> {
     return async(dispatch)=> {
         try {
-            let response = await fetch(`https://strive-jobs-api.herokuapp.com/job?search=${inputValue}&limit=20`);
+            let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?search=${inputValue}&limit=20`);
             if (response.ok) {
                 console.log("Response:", response);
               let jobs = await response.json();
@@ -39,6 +46,10 @@ export const getAlljobOffers =(inputValue)=> {
               dispatch({
                   type: GET_JOB_OFFERS,
                   payload:jobs
+              })
+              dispatch({
+                  type:GET_LOADING_SPINNER,
+                  payload:false
               })
             }else{
                 dispatch({
