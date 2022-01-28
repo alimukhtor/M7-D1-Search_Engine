@@ -47,14 +47,12 @@ const Home = ({jobs, getJobs }) => {
             onChange={(e) => setInputValue(e.target.value)}
           />
         </Form.Group>
-        <Button variant="" className="rounded-pill" style={{background: "#287C41" }}>
-          {/* <Link to="/favorites">
+        {/* <Button variant="" className="rounded-pill" style={{background: "#287C41" }}>Search</Button> */}
+          <Link to="/favorites">
             <div className={(location.pathname === "/favorites" ? " active" : "")}>
              Favorites <FcLike className="mb-1" style={{ background: "#282C34", fontSize:"20px" }}/>
             </div>
-          </Link> */}
-          Search
-        </Button>
+          </Link>
       </Form>
       <Row>
         <JobList job={jobs} inputValue={inputValue}/>

@@ -10,20 +10,17 @@ export const GET_INPUT_VALUE = "GET_INPUT_VALUE"
 export const GET_LIMIT = "GET_LIMIT"
 export const GET_LOADING_SPINNER = "GET_LOADING_SPINNER"
 
-export const addToFavoritesWithThunk =(favJob)=> ({
-        type:ADD_TO_FAVORITES,
-        payload: favJob
-})
+export const addToFavoritesWithThunk =(favJob)=> {
+    return async(dispatch, getState)=> {
+        console.log("Here is my getstate:", getState());
+        dispatch({
+            type: ADD_TO_FAVORITES,
+            payload: favJob
+        })
+    }
+        
+}
 
-
-// {
-//     return (dispatch)=> {
-//         dispatch({
-//             type: ADD_TO_FAVORITES,
-//             payload: favJob
-//         })
-//     }
-// }
 
 export const removeFromFavsWithThunk =(index)=> {
     return (dispatch)=> {

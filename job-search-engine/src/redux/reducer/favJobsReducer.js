@@ -6,17 +6,17 @@ const favJobsReducer =(state = initialState.favoriteJobs, action)=> {
         case ADD_TO_FAVORITES:
             return{
                 ...state,
-                    favorites:[...state.favoriteJobs.favorites, action.payload]
+                    favorites:[...state.favorites, action.payload]
                 }
         case REMOVE_FROM_FAVS:
             return{
                 ...state,
-                    favorites: state.favoriteJobs.favorites.filter((fav, i)=> i !== action.payload)
+                    favorites: state.favorites.filter((fav, i)=> i !== action.payload)
                 }
         case SET_ERROR:
             return{
                 ...state,
-                    isError: [state.favoriteJobs.isError, action.payload]
+                    isError: [state.isError, action.payload]
                 }
         default:
             return state
