@@ -1,38 +1,47 @@
 import { MdPersonSearch } from "react-icons/md";
 import { FcLike } from "react-icons/fc";
-import { Form, Row, Button} from "react-bootstrap";
+import { Form, Row, Button, Dropdown, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import JobList from "./JobList";
 import { getAlljobOffers } from "../redux/actions";
 import { connect } from "react-redux";
 
+const mapStateToProps = (state) => ({
+  jobs: state.jobOffers.jobs,
+  inputValue: state.jobOffers.inputValue,
+});
 
-const mapStateToProps =(state)=> ({
-  jobs:state.jobOffers.jobs,
-  inputValue: state.jobOffers.inputValue
-})
-
-const mapDispatchToProps =(dispatch)=> ({
-  getJobs: (inputValue)=> {
-    dispatch(getAlljobOffers(inputValue))
+const mapDispatchToProps = (dispatch) => ({
+  getJobs: (inputValue) => {
+    dispatch(getAlljobOffers(inputValue));
   },
-})
-const Home = ({jobs, getJobs }) => {
-  const [inputValue, setInputValue] = useState("")
-  const location = useLocation()
-  
+});
+const Home = ({ jobs, getJobs }) => {
+  const [inputValue, setInputValue] = useState("");
+  const location = useLocation();
+
   console.log("data:", jobs);
 
-
-    
   useEffect(() => {
-    getJobs(inputValue)
+    getJobs(inputValue);
   }, [inputValue]);
-
 
   return (
     <>
+    <Row className="mt-5">
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Dropdown Button
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+    </Row>
       <h1 className="text-light mt-5 text-center">
         <strong>Strive Job Search Engine</strong> <MdPersonSearch />
       </h1>
@@ -48,16 +57,20 @@ const Home = ({jobs, getJobs }) => {
           />
         </Form.Group>
         {/* <Button variant="" className="rounded-pill" style={{background: "#287C41" }}>Search</Button> */}
-          <Link to="/favorites">
-            <div className={(location.pathname === "/favorites" ? " active" : "")}>
-             Favorites <FcLike className="mb-1" style={{ background: "#282C34", fontSize:"20px" }}/>
-            </div>
-          </Link>
+        <Link to="/favorites">
+          <div className={location.pathname === "/favorites" ? " active" : ""}>
+            Favorites{" "}
+            <FcLike
+              className="mb-1"
+              style={{ background: "#282C34", fontSize: "20px" }}
+            />
+          </div>
+        </Link>
       </Form>
       <Row>
-        <JobList job={jobs} inputValue={inputValue}/>
+        <JobList job={jobs} inputValue={inputValue} />
       </Row>
     </>
   );
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
