@@ -6,6 +6,7 @@ import { Link, useLocation } from "react-router-dom";
 import JobList from "./JobList";
 import { getAlljobOffers } from "../redux/actions";
 import { connect } from "react-redux";
+import CompanyDetailPage from "./CompanyDetailPage";
 
 const mapStateToProps = (state) => ({
   jobs: state.jobOffers.jobs,
@@ -20,8 +21,8 @@ const mapDispatchToProps = (dispatch) => ({
 const Home = ({ jobs, getJobs }) => {
   const [inputValue, setInputValue] = useState("");
   const location = useLocation();
+  console.log("ali", jobs);
 
-  console.log("data:", jobs);
 
   useEffect(() => {
     getJobs(inputValue);
@@ -36,9 +37,9 @@ const Home = ({ jobs, getJobs }) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          <Dropdown.Item>Action</Dropdown.Item>
+          <Dropdown.Item>Another action</Dropdown.Item>
+          <Dropdown.Item>Something else</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </Row>
@@ -69,6 +70,7 @@ const Home = ({ jobs, getJobs }) => {
       </Form>
       <Row>
         <JobList job={jobs} inputValue={inputValue} />
+        <CompanyDetailPage jobs={jobs} />
       </Row>
     </>
   );

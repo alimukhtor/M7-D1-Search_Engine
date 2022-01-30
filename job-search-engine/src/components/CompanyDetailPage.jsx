@@ -3,13 +3,19 @@
 // import { MdPersonSearch } from "react-icons/md";
 // import {Card, Button, Row, Col, Form} from 'react-bootstrap'
 
-const CompanyDetailPage =()=> {
+const CompanyDetailPage =({jobs})=> {
   // const [company, setCompany] = useState('')
   // const [job, setJob] = useState([])
 
   return(
-    <h1>this is company name</h1>
+    <>
+    {
+      jobs.data && jobs.data.map(job => (
+        <h1>this is company name {job.company_name}</h1>
 
+      ))
+    }
+    </>
   )
 
 

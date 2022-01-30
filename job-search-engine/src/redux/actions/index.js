@@ -37,9 +37,7 @@ export const getAlljobOffers =(inputValue)=> {
         try {
             let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?search=${inputValue}&limit=20`);
             if (response.ok) {
-                console.log("Response:", response);
               let jobs = await response.json();
-              console.log("JobsL:", jobs);
               dispatch({
                   type: GET_JOB_OFFERS,
                   payload:jobs
