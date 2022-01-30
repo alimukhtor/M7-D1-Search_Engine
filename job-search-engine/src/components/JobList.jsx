@@ -50,6 +50,7 @@ const JobList =({job, inputValue, addToFavorite, isError, isLoading, sendToCompP
                           {j.company_name}
                         </div>
                       </Link>
+                       <a href={j.url}>{j.company_name}</a>
                     </Card.Title>
                     <Card.Text style={{ color: "white" }}>{j.title}</Card.Text>
                     
