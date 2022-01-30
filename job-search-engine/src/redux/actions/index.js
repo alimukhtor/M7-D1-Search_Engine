@@ -9,6 +9,7 @@ export const GET_JOB_OFFERS_ERROR = "GET_JOB_OFFERS_ERROR"
 export const GET_INPUT_VALUE = "GET_INPUT_VALUE"
 export const GET_LIMIT = "GET_LIMIT"
 export const GET_LOADING_SPINNER = "GET_LOADING_SPINNER"
+export const GET_COMPANY_DETAIL = 'GET_COMPANY_DETAIL'
 
 export const addToFavoritesWithThunk =(favJob)=> {
     return async(dispatch, getState)=> {
@@ -32,6 +33,14 @@ export const removeFromFavsWithThunk =(index)=> {
     }
 }
 
+export const sendToCompDetail =(detail)=>{
+    return (dispatch)=> {
+        dispatch({
+            type:GET_COMPANY_DETAIL,
+            payload:detail
+        })
+    }
+}
 export const getAlljobOffers =(inputValue)=> {
     return async(dispatch)=> {
         try {

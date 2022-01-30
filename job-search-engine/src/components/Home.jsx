@@ -70,7 +70,7 @@ const Home = ({ jobs, getJobs }) => {
       </Form>
       <Row>
         <JobList job={jobs} inputValue={inputValue} />
-        <CompanyDetailPage jobs={jobs} />
+        
       </Row>
     </>
   );

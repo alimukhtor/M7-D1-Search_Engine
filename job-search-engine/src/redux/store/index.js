@@ -1,7 +1,9 @@
 import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
 import favJobsReducer from '../reducer/favJobsReducer'
 import jobsReducer from '../reducer/jobsReducer'
+import compDetailReducer from '../reducer/compDetailReducer'
 import thunk from 'redux-thunk'
+
 
 
 // ************** REDUX-THUNK MIDDLEWARE **************
@@ -23,6 +25,9 @@ export const initialState = {
         limit: '',
         isError: null,
         isLoading: true
+    },
+    companyDetails:{
+        detail:[null]
     }
 }
 
@@ -30,7 +35,8 @@ export const initialState = {
 
 const multiReducer = combineReducers({
     favoriteJobs: favJobsReducer,
-    jobOffers: jobsReducer
+    jobOffers: jobsReducer,
+    companyDetails:compDetailReducer
 })
 
 // *************** CONFIGURATION STOREE HERE *****************

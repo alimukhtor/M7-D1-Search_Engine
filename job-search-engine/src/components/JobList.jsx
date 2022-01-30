@@ -1,10 +1,11 @@
-import {Col, Card, Button, Alert, Spinner} from "react-bootstrap";
+import {Col, Card, Button, Spinner} from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 
 import { AiFillLike } from "react-icons/ai";
 // import { AiTwotoneLike } from "react-icons/ai";
 import {connect} from 'react-redux'
 import { addToFavoritesWithThunk } from "../redux/actions";
+import { sendToCompDetail } from '../redux/actions';
 
 const mapStateToProps =(state)=> ({
   isError: state.jobOffers.isError,
@@ -15,9 +16,12 @@ const mapDispatchToProps = (dispatch) => ({
   addToFavorite: (favJob) => {
     dispatch(addToFavoritesWithThunk(favJob))
   },
+  sendToCompPage:(detail)=> {
+    dispatch(sendToCompDetail(detail))
+  }
 })
 
-const JobList =({job, inputValue, addToFavorite, isError, isLoading})=> {
+const JobList =({job, inputValue, addToFavorite, isError, isLoading, sendToCompPage})=> {
     const location = useLocation();
     return(
       <>
@@ -38,9 +42,11 @@ const JobList =({job, inputValue, addToFavorite, isError, isLoading})=> {
                 <Card className="mt-5">
                   <Card.Body>
                     <Card.Title style={{ color: "white" }}>
-                      <Link to="/:company">
+                      <Link to="/companyName">
                         <div
-                          className={(location.pathname === "/:company" ? " active" : "")}>
+                          className={(location.pathname === "/companyName" ? " active" : "")}
+                          onClick={()=> {sendToCompPage(j)}}
+                          >
                           {j.company_name}
                         </div>
                       </Link>

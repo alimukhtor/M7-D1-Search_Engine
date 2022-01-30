@@ -2,70 +2,32 @@
 // import { useParams } from 'react-router-dom'
 // import { MdPersonSearch } from "react-icons/md";
 // import {Card, Button, Row, Col, Form} from 'react-bootstrap'
+import {connect} from 'react-redux'
 
-const CompanyDetailPage =({jobs})=> {
+
+const mapStateToProps = (state) => ({
+  detail: state.companyDetails.detail,
+});
+
+
+const CompanyDetailPage =({detail})=> {
   // const [company, setCompany] = useState('')
   // const [job, setJob] = useState([])
 
   return(
     <>
     {
-      jobs.data && jobs.data.map(job => (
-        <h1>this is company name {job.company_name}</h1>
+      detail && detail.map(d => (
+        <h1>this is company name {d.company_name}</h1>
 
       ))
     }
+
     </>
   )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const fetchJobsWithCompany = async (props) => {
-    //     try {
-    //       const response = await fetch(
-    //         `https://strive-jobs-api.herokuapp.com/jobs?company=${company}`,
-    //         {
-    //           "Content-Type": "application/json",
-    //         }
-    //       );
-      
-    //       if (response.ok) {
-    //         const jobs = await response.json();
-    //         setJob(jobs);
-    //         console.log(job);
-    //       }
-          
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   };
-
-    //   useEffect(() => {
-    //     fetchJobsWithCompany();
-    //   }, [company]);
 
 
 }
 
 
-export default CompanyDetailPage
+export default connect(mapStateToProps)(CompanyDetailPage)
