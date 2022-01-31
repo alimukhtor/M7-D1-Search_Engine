@@ -10,6 +10,7 @@ export const GET_INPUT_VALUE = "GET_INPUT_VALUE"
 export const GET_LIMIT = "GET_LIMIT"
 export const GET_LOADING_SPINNER = "GET_LOADING_SPINNER"
 export const GET_COMPANY_DETAIL = 'GET_COMPANY_DETAIL'
+export const REMOVE_COMPANY = 'REMOVE_COMPANY'
 
 export const addToFavoritesWithThunk =(favJob)=> {
     return async(dispatch, getState)=> {
@@ -29,6 +30,15 @@ export const removeFromFavsWithThunk =(index)=> {
             type: REMOVE_FROM_FAVS,
             payload: index
 
+        })
+    }
+}
+
+export const removeCompany = (id)=> {
+    return(dispatch)=> {
+        dispatch({
+            type:REMOVE_COMPANY,
+            payload: id
         })
     }
 }
