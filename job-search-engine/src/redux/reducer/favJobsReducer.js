@@ -1,5 +1,5 @@
 import { initialState } from "../store";
-import {ADD_TO_FAVORITES, REMOVE_FROM_FAVS, SET_ERROR} from '../actions'
+import {ADD_TO_FAVORITES, REMOVE_FROM_FAVS, GET_JOB_OFFERS_ERROR} from '../actions'
 
 const favJobsReducer =(state = initialState.favoriteJobs, action)=> {
     switch(action.type){
@@ -13,7 +13,7 @@ const favJobsReducer =(state = initialState.favoriteJobs, action)=> {
                 ...state,
                     favorites: state.favorites.filter((fav, i)=> i !== action.payload)
                 }
-        case SET_ERROR:
+        case GET_JOB_OFFERS_ERROR:
             return{
                 ...state,
                     isError: [state.isError, action.payload]

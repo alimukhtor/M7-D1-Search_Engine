@@ -1,20 +1,28 @@
 import {connect} from 'react-redux'
-const mapStateToProps =(state)=> ({
-    isError: state.favoriteJobs.isError
-})
+import {Alert} from 'react-bootstrap'
 
-const mapDispatchToProps =()=> ({
-    setErrors: ()=> {
-        dispatch({
-            type: 'SET_ERROR',
-            payload: "404"
-        })
-    } 
+// const mapStateToProps =(state)=> ({
+//     isError: state.favoriteJobs.isError
+// })
 
-})
-const ErrorHandler =()=> {
+// const mapDispatchToProps =()=> ({
+//     setErrors: ()=> {
+//         dispatch({
+//             type: 'SET_ERROR',
+//             payload: "404"
+//         })
+//     } 
+
+// })
+const ErrorHandler =({error})=> {
     return(
-        <h1>404 not found!</h1>
+       { 
+        // error
+        // :   
+        // <Alert variant="danger" className="text-center rounded-pill mt-5" style={{ fontSize: "15px",  marginLeft:"500px" }}>
+        //     Error has occured {error}
+        //   </Alert>
+        }
     )
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ErrorHandler)
+export default ErrorHandler

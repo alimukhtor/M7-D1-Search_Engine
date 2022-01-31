@@ -1,6 +1,5 @@
-import {Col, Card, Button, Spinner} from "react-bootstrap";
+import {Col, Card, Button, Spinner, Alert} from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-
 import { AiFillLike } from "react-icons/ai";
 // import { AiTwotoneLike } from "react-icons/ai";
 import {connect} from 'react-redux'
@@ -8,7 +7,7 @@ import { addToFavoritesWithThunk } from "../redux/actions";
 import { sendToCompDetail } from '../redux/actions';
 
 const mapStateToProps =(state)=> ({
-  isError: state.jobOffers.isError,
+  isError: state.favoriteJobs.isError,
   isLoading: state.jobOffers.isLoading
 })
 
@@ -26,14 +25,15 @@ const JobList =({job, inputValue, addToFavorite, isError, isLoading, sendToCompP
     return(
       <>
       {
-        isLoading 
-        // isError
+        isError
         ?
-        // <Alert variant="danger" className="text-center rounded-pill mt-5" style={{ fontSize: "15px",  marginLeft:"500px" }}>
-        //     Error has occured {isError}
-        //   </Alert> 
+        <Alert variant="danger" className="text-center rounded-pill mt-5" style={{ fontSize: "15px",  marginLeft:"500px" }}>
+           Error has occured {isError}
+        </Alert>
+         : isLoading 
+        ?
         <Spinner animation="border" variant="success"/>
-        :   
+       :
           job.data &&
           job.data
             .filter((j) => j.title.toLowerCase().includes(inputValue))
@@ -62,8 +62,8 @@ const JobList =({job, inputValue, addToFavorite, isError, isLoading, sendToCompP
                 </Card>
               </Col>
             ))
-            
-      }
+           
+          }
         </>
           )
 }
