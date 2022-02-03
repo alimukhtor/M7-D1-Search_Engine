@@ -27,7 +27,9 @@ const JobList = ({
   isLoading,
   sendToCompPage,
 }) => {
+  
   const location = useLocation();
+
   return (
     <>
       {isError ? (
@@ -45,7 +47,7 @@ const JobList = ({
         job.data
           .filter((j) => j.title.toLowerCase().includes(inputValue))
           .map((j) => (
-            <Col xs={3} key={j._id}>
+            <Col xs={12} md={4} lg={3} key={j._id}>
               <Card className="mt-5">
                 <Card.Body>
                   <Card.Title style={{ color: "white" }}>

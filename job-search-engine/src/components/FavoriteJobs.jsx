@@ -1,4 +1,4 @@
-import { ListGroup, Button, Row, Col } from "react-bootstrap";
+import { ListGroup, Button, Row, Col, Container } from "react-bootstrap";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { connect } from "react-redux";
 import { removeFromFavsWithThunk } from "../redux/actions";
@@ -15,11 +15,12 @@ const mapDispatchToProps = (dispatch) => ({
 
 const FavoriteJobs = ({ favorites, removeFromFavorite }) => {
   return (
+      <Container>
     <ListGroup className="mt-5">
       {favorites &&
         favorites.map((fav, i) => (
-          <Row>
-            <Col>
+          <Row className="d-flex justify-content-center">
+            <Col xs={10} lg={10}>
               <ListGroup.Item
                 key={i}
                 className="my-2"
@@ -32,7 +33,7 @@ const FavoriteJobs = ({ favorites, removeFromFavorite }) => {
                 {fav.title}
               </ListGroup.Item>
             </Col>
-            <Col>
+            <Col xs={2} lg={2}>
               <Button
                 className="my-3"
                 variant="danger"
@@ -46,6 +47,7 @@ const FavoriteJobs = ({ favorites, removeFromFavorite }) => {
           </Row>
         ))}
     </ListGroup>
+    </Container>
   );
 };
 

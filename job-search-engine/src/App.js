@@ -8,7 +8,6 @@ import {Container} from 'react-bootstrap'
 
 function App() {
   return (
-    <Container>
     <div className="App">
        <BrowserRouter>
      	 <Routes>
@@ -18,7 +17,6 @@ function App() {
        </Routes>
      </BrowserRouter>
     </div>
-    </Container>
   );
 }
 
