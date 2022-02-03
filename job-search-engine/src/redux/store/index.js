@@ -21,8 +21,6 @@ export const initialState = {
     },
     jobOffers:{
         jobs: [],
-        inputValue: '',
-        limit: '',
         isError: null,
         isLoading: true
     },

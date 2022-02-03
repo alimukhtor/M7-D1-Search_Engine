@@ -8,8 +8,7 @@ import { getAlljobOffers } from "../redux/actions";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
-  jobs: state.jobOffers.jobs,
-  inputValue: state.jobOffers.inputValue,
+  jobs: state.jobOffers.jobs
 });
 
 const mapDispatchToProps = (dispatch) => ({
