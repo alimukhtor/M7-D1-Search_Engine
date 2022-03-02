@@ -7,6 +7,7 @@ export const GET_JOB_OFFERS_ERROR = "GET_JOB_OFFERS_ERROR";
 export const GET_LOADING_SPINNER = "GET_LOADING_SPINNER";
 export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const REMOVE_COMPANY = "REMOVE_COMPANY";
+export const TOGGLE_LIKED_JOB = "TOGGLE_LIKED_JOB";
 
 export const addToFavoritesWithThunk = (favJob) => {
   return async (dispatch, getState) => {

@@ -17,7 +17,8 @@ const composeThatAlwaysWorks = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || co
 export const initialState = {
     favoriteJobs:{
         favorites: [],
-        isError: false
+        isError: false,
+        isLiked:false
     },
     jobOffers:{
         jobs: [],

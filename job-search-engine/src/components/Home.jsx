@@ -1,6 +1,6 @@
 import { MdPersonSearch } from "react-icons/md";
 import { FcLike } from "react-icons/fc";
-import { Form, Row, Container, Col } from "react-bootstrap";
+import { Form, Row, Container, Col, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import JobList from "./JobList";
@@ -8,7 +8,8 @@ import { getAlljobOffers } from "../redux/actions";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => ({
-  jobs: state.jobOffers.jobs
+  jobs: state.jobOffers.jobs,
+  favorites: state.favoriteJobs.favorites.length,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -17,15 +18,14 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-const Home = ({ jobs, getJobs }) => {
+const Home = ({ jobs, getJobs, favorites }) => {
   const [inputValue, setInputValue] = useState("");
   const location = useLocation();
 
-  const handleInput =(e)=> {
-    setInputValue(e.target.value)
-  }
+  const handleInput = (e) => {
+    setInputValue(e.target.value);
+  };
 
-  
   useEffect(() => {
     getJobs(inputValue);
   }, [inputValue]);
@@ -48,19 +48,20 @@ const Home = ({ jobs, getJobs }) => {
               />
             </Form.Group>
             <Link to="/favorites">
-              <div className={location.pathname === "/favorites" ? " active" : ""}>
-                Favorites{" "}
-                <FcLike
-                  className="mb-1"
-                  style={{ background: "#282C34", fontSize: "20px" }}
-                />
+              <div
+                className={location.pathname === "/favorites" ? " active" : ""}
+              >
+                <Button variant="">
+                  <FcLike className="mb-2 mr-2" style={{ fontSize: "30px" }} />
+                  <span className="text-light" style={{ fontSize: "25px" }}>{favorites}</span>
+                </Button>
               </div>
             </Link>
           </Form>
         </Col>
       </Row>
       <Row>
-          <JobList job={jobs} inputValue={inputValue} />
+        <JobList job={jobs} inputValue={inputValue} />
       </Row>
     </Container>
   );

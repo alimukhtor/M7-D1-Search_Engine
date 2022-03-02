@@ -3,6 +3,7 @@ import {
   ADD_TO_FAVORITES,
   REMOVE_FROM_FAVS,
   GET_JOB_OFFERS_ERROR,
+  TOGGLE_LIKED_JOB
 } from "../actions";
 
 const favJobsReducer = (state = initialState.favoriteJobs, action) => {
@@ -22,6 +23,11 @@ const favJobsReducer = (state = initialState.favoriteJobs, action) => {
         ...state,
         isError: [state.isError, action.payload],
       };
+    case TOGGLE_LIKED_JOB:
+      return{
+        ...state,
+        isLiked:true
+      }
     default:
       return state;
   }
