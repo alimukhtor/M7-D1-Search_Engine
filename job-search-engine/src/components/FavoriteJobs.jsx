@@ -1,4 +1,4 @@
-import { ListGroup, Button, Row, Col, Container } from "react-bootstrap";
+import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { connect } from "react-redux";
 import { removeFromFavsWithThunk } from "../redux/actions";
@@ -16,37 +16,30 @@ const mapDispatchToProps = (dispatch) => ({
 const FavoriteJobs = ({ favorites, removeFromFavorite }) => {
   return (
       <Container>
-    <ListGroup className="mt-5">
-      {favorites &&
-        favorites.map((fav, i) => (
-          <Row className="d-flex justify-content-center">
-            <Col xs={10} lg={10}>
-              <ListGroup.Item
-                key={i}
-                className="my-2"
-                style={{
-                  background: "#282C34",
-                  color: "white",
-                  border: "2px solid white",
-                }}
-              >
-                {fav.title}
-              </ListGroup.Item>
-            </Col>
-            <Col xs={2} lg={2}>
-              <Button
-                className="my-3"
-                variant="danger"
-                onClick={() => {
-                  removeFromFavorite(i);
-                }}
-              >
-                <RiDeleteBin6Line />
-              </Button>
-            </Col>
-          </Row>
-        ))}
-    </ListGroup>
+    <Row className="mt-5 d-flex justify-content-center">
+      {favorites.map((detail, i) => (
+        <Col md={10}>
+          <Card className="text-light mt-5">
+            <Card.Img variant="top" src={detail.company_logo_url} />
+            <Card.Body>
+              <Card.Title className="text-info">{detail.title}</Card.Title>
+              <Card.Text
+                dangerouslySetInnerHTML={{ __html: detail.description }}
+              ></Card.Text>
+              <Button variant="success" className="text-right">{detail.salary}</Button>
+            </Card.Body>
+               <Button
+            variant="danger"
+            onClick={() => {
+              removeFromFavorite(i);
+            }}
+          >
+            <RiDeleteBin6Line />
+          </Button>
+          </Card>
+        </Col>
+      ))}
+    </Row>
     </Container>
   );
 };

@@ -1,10 +1,10 @@
-import { Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Card, Container } from "react-bootstrap";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { connect } from "react-redux";
 import { removeCompany } from "../redux/actions";
 
 const mapStateToProps = (state) => ({
-  detail: state.companyDetails.detail,
+  companyInfo: state.companyDetails.detail,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -14,31 +14,31 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-const CompanyDetailPage = ({ detail, removeCompanyPage }) => {
+
+const CompanyDetailPage = ({ companyInfo, removeCompanyPage }) => {
+  console.log("Info", companyInfo[0][0]);
   return (
-    <>
-      {detail &&
-        detail.map((d) => (
-          <Row>
-            <Col>
-              <h1 className="text-white text-center">
-                This is The Company called : "{d.company_name}"
-              </h1>
-            </Col>
-            <Col>
-              <Button
-                className="my-3"
-                variant="danger"
-                onClick={() => {
-                  removeCompanyPage(d);
-                }}
-              >
-                <RiDeleteBin6Line />
-              </Button>
-            </Col>
-          </Row>
-        ))}
-    </>
+    <Container>
+    <h1 className="text-info mt-5 text-center">
+      This is Company Details
+    </h1>
+    <Row className="mt-5 d-flex justify-content-center">
+      {companyInfo[0].map((detail) => (
+        <Col xs={12} md={12}>
+          <Card className="text-light mt-5">
+            <Card.Img variant="top" src={detail.company_logo_url} />
+            <Card.Body>
+              <Card.Title className="text-info">{detail.title}</Card.Title>
+              <Card.Text
+                dangerouslySetInnerHTML={{ __html: detail.description }}
+              ></Card.Text>
+              <Button variant="success">{detail.salary}</Button>
+            </Card.Body>
+          </Card>
+        </Col>
+      ))}
+    </Row>
+  </Container>
   );
 };
 

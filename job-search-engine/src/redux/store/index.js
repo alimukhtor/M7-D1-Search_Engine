@@ -25,7 +25,7 @@ export const initialState = {
         isLoading: true
     },
     companyDetails:{
-        detail:[null]
+        detail:[]
     }
 }
 

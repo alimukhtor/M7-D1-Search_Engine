@@ -36,12 +36,21 @@ export const removeCompany = (id) => {
   };
 };
 
-export const sendToCompDetail = (detail) => {
-  return (dispatch) => {
-    dispatch({
-      type: GET_COMPANY_DETAIL,
-      payload: detail,
-    });
+export const sendToCompDetail = (company_name) => {
+  return async(dispatch) => {
+   try {
+     let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?company=${company_name}`)
+     if(response.ok){
+      const {data} = await response.json()
+      console.log("Data", data);
+      dispatch({
+        type:GET_COMPANY_DETAIL,
+        payload: data
+      })
+     }
+   } catch (error) {
+     console.log(error)
+   }
   };
 };
 

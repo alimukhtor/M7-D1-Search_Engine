@@ -1,6 +1,6 @@
 import { Col, Card, Button, Spinner, Alert } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { AiFillLike } from "react-icons/ai";
+import { FcLikePlaceholder } from "react-icons/fc";
 import { connect } from "react-redux";
 import { addToFavoritesWithThunk } from "../redux/actions";
 import { sendToCompDetail } from "../redux/actions";
@@ -14,8 +14,8 @@ const mapDispatchToProps = (dispatch) => ({
   addToFavorite: (favJob) => {
     dispatch(addToFavoritesWithThunk(favJob));
   },
-  sendToCompPage: (detail) => {
-    dispatch(sendToCompDetail(detail));
+  sendToCompPage: (company_name) => {
+    dispatch(sendToCompDetail(company_name));
   },
 });
 
@@ -57,15 +57,15 @@ const JobList = ({
                           location.pathname === "/companyName" ? " active" : ""
                         }
                         onClick={() => {
-                          sendToCompPage(j);
+                          sendToCompPage(j.company_name);
                         }}
                       >
-                        Company Info: {j.company_name}
+                        <span className="text-info" style={{ fontSize: "25px" }}>{j.company_name}</span>
                       </div>
                     </Link>
-                    <a href={j.url}>Company Website: {j.company_name}</a>
+                   
                   </Card.Title>
-                  <Card.Text style={{ color: "white" }}>{j.title}</Card.Text>
+                  <Card.Text style={{ color: "white" }}><a href={j.url}><span className="text-light">{j.title}</span></a></Card.Text>
 
                   <Button
                     className="border-0 mr-auto"
@@ -74,7 +74,7 @@ const JobList = ({
                       addToFavorite(j);
                     }}
                   >
-                    <AiFillLike style={{ fontSize: "25px" }} />
+                    <FcLikePlaceholder style={{ fontSize: "25px" }} />
                   </Button>
                 </Card.Body>
               </Card>
