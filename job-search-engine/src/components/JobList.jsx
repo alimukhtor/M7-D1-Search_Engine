@@ -1,6 +1,6 @@
 import { Col, Card, Button, Spinner, Alert } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { FcLikePlaceholder } from "react-icons/fc";
+import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { connect } from "react-redux";
 import { addToFavoritesWithThunk } from "../redux/actions";
 import { sendToCompDetail } from "../redux/actions";
@@ -47,7 +47,6 @@ const JobList = ({
       ) : (
         job.data &&
         job.data
-          .filter((j) => j.title.toLowerCase().includes(inputValue))
           .map((j) => (
             <Col xs={12} md={4} lg={3} key={j._id}>
               <Card className="mt-5">
@@ -72,7 +71,7 @@ const JobList = ({
                   <Button
                     className="border-0 mr-auto"
                     style={{ background: "#282C34" }}
-                    disabled={!!favorites.find(favJob => favJob._id === j._id )}
+                    disabled={!!favorites.find(favJob => favJob._id === j._id) ? <FcLike /> : null}
                     onClick={() => {
                       addToFavorite(j);
                     }}

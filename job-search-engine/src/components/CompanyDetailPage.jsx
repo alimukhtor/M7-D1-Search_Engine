@@ -22,8 +22,8 @@ const CompanyDetailPage = ({ companyInfo, removeCompanyPage }) => {
       This is Company Details
     </h1>
     <Row className="mt-5 d-flex justify-content-center">
-      {companyInfo[0].map((detail) => (
-        <Col xs={12} md={12}>
+      {companyInfo[0].map((detail, i) => (
+        <Col xs={12} md={12} key={i}>
           <Card className="text-light mt-5">
             <Card.Img variant="top" src={detail.company_logo_url} />
             <Card.Body>

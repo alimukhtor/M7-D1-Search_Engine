@@ -78,7 +78,9 @@ export const getAlljobOffers = (inputValue) => {
         });
       }
     } catch (error) {
-      console.log(error);
+      dispatch({
+        type: GET_JOB_OFFERS_ERROR,
+      });
     }
   };
 };

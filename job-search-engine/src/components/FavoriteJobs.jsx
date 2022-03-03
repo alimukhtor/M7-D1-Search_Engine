@@ -18,7 +18,7 @@ const FavoriteJobs = ({ favorites, removeFromFavorite }) => {
       <Container>
     <Row className="mt-5 d-flex justify-content-center">
       {favorites.map((detail, i) => (
-        <Col md={10}>
+        <Col md={10} key={i}>
           <Card className="text-light mt-5">
             <Card.Img variant="top" src={detail.company_logo_url} />
             <Card.Body>
