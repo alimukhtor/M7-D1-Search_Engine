@@ -48,7 +48,7 @@ const JobList = ({
         job.data &&
         job.data
           .map((j) => (
-            <Col xs={12} md={4} lg={3} key={j._id}>
+            <Col xs={12} md={3} lg={4} key={j._id}>
               <Card className="mt-5">
                 <Card.Body>
                   <Card.Title style={{ color: "white" }}>
