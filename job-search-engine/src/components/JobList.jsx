@@ -8,6 +8,7 @@ import { sendToCompDetail } from "../redux/actions";
 const mapStateToProps = (state) => ({
   isError: state.favoriteJobs.isError,
   isLoading: state.jobOffers.isLoading,
+  favorites: state.favoriteJobs.favorites,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -26,6 +27,7 @@ const JobList = ({
   isError,
   isLoading,
   sendToCompPage,
+  favorites
 }) => {
   
   const location = useLocation();
@@ -70,6 +72,7 @@ const JobList = ({
                   <Button
                     className="border-0 mr-auto"
                     style={{ background: "#282C34" }}
+                    disabled={!!favorites.find(favJob => favJob._id === j._id )}
                     onClick={() => {
                       addToFavorite(j);
                     }}
