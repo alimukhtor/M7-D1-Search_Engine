@@ -16,7 +16,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 const CompanyDetailPage = ({ companyInfo, removeCompanyPage }) => {
-  console.log("Info", companyInfo[0][0]);
   return (
     <Container>
     <h1 className="text-info mt-5 text-center">
