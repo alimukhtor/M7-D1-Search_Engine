@@ -1,21 +1,13 @@
 import { Button, Row, Col, Card, Container } from "react-bootstrap";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { connect } from "react-redux";
-import { removeCompany } from "../redux/actions";
 
 const mapStateToProps = (state) => ({
   companyInfo: state.companyDetails.detail,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  removeCompanyPage: (id) => {
-    dispatch(removeCompany(id));
-  },
-});
 
-
-
-const CompanyDetailPage = ({ companyInfo, removeCompanyPage }) => {
+const CompanyDetailPage = ({ companyInfo }) => {
   return (
     <Container>
     <h1 className="text-info mt-5 text-center">
@@ -41,4 +33,4 @@ const CompanyDetailPage = ({ companyInfo, removeCompanyPage }) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompanyDetailPage);
+export default connect(mapStateToProps)(CompanyDetailPage);
